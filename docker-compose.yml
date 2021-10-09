@@ -19,7 +19,22 @@ services:
              python manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./backend:/app
+    restart: always
     ports:
       - "8000:8000"
     depends_on:
       - db
+
+  frontend:
+    build:
+      dockerfile: Dockerfile
+      context: ./frontend
+    command: node_modules/.bin/ng serve --host 0.0.0.0 --disableHostCheck --poll 1000
+    volumes:
+      - ./frontend:/usr/bookForum/
+      - '/usr/bookForum/node_modules'
+    restart: always
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
