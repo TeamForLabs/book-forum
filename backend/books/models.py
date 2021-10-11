@@ -5,7 +5,7 @@ from django.db import models
 class Book(models.Model):
     title = models.CharField(max_length=500)
     description = models.TextField(max_length=2500)
-    thumbnail = models.URLField()
+    thumbnail = models.URLField(max_length=500)
     published_year = models.PositiveSmallIntegerField(default=1984)
     genres = models.ManyToManyField('Genre', related_name='books')
     author = models.ForeignKey('Author',
@@ -13,7 +13,7 @@ class Book(models.Model):
                                related_name='books')
     creator = models.ForeignKey(User,
                                 related_name='books',
-                                on_delete=models.CASCADE, )
+                                on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
 
     def __str__(self):
@@ -28,7 +28,7 @@ class Author(models.Model):
 
 
 class Genre(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
         return self.title

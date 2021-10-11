@@ -7,6 +7,7 @@ from django.db import models
 class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'published_year')
     search_fields = ['title', 'author__full_name', 'published_year']
+    filter_horizontal = ('genres',)
     list_filter = [
         'author__full_name',
         'published_year',
@@ -14,9 +15,15 @@ class BookAdmin(admin.ModelAdmin):
     ]
 
 
+class BookInline(admin.StackedInline):
+    model = Book
+    classes = ['collapse']
+
+
 class AuthorAdmin(admin.ModelAdmin):
     search_fields = ['full_name']
     list_display = ('full_name', 'books_count')
+    inlines = [BookInline]
 
     @staticmethod
     def books_count(obj):
