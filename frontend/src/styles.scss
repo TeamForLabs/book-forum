@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~normalize.css';
+@import '../node_modules/modern-css-reset/dist/reset.min.css';
+
+:root {
+    --clr-dark: rgb(13, 17, 19);
+    --clr-light: #fff;
+    --clr-accent: rgb(222, 52, 0);
+    --clr-accent-dark: rgb(163, 38, 0);
+    --clr-secondary: rgb(0, 76, 199);
+
+    --br: 0.5em;
+    --transition: transform 200ms ease-out;
+}
+
+.btn {
+    border: 0;
+    background-color: var(--clr-secondary);
+    border-radius: 100vw;
+    color: var(--clr-light);
+    font-weight: bold;
+    padding: 0.5em 1em;
+}
