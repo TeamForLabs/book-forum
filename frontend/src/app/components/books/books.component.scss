@@ -1,11 +1,7 @@
 .books {
     font-family: Roboto-Condensed-Regular;
-    min-height: calc(100vh - 120px);
-    display: grid;
-    place-items: center;
-    background-color: var(--color-dark);
-    color: var(--color-light);
-    z-index: -999;
+    // background-color: var(--color-dark);
+    // border: 2px dashed red;
 }
 
 img {
@@ -63,7 +59,7 @@ img {
 .background {
     inset: 0;
     position: absolute;
-    background-color: #234;
+    background-color: hsl(203, 32%, 29%);
     z-index: -1;
     transform: scale(.2, .9);
     border-radius: var(--br);
@@ -82,6 +78,7 @@ img {
             font-size: 0.55rem;
             line-height: 0.9rem;
             margin-bottom: 1em;
+            color: #aaa;
         }
 
         .btn {
@@ -93,8 +90,10 @@ img {
 }
 
 .book:hover {
+    color: var(--color-light);
+    z-index: 10;
     .bookmark {
-        transform: translate(150%, -40%)
+        transform: translate(150%, -41%);
     }
     .front {
         transform: translateY(-30%) scale(0.8);
@@ -149,7 +148,9 @@ img {
 
 }
 
-// .vertical {
-//     border-right: 1px var(--color-light);
-//     height: max(100%, 10);
-// }
+.clr-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+}
