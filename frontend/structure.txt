@@ -1,5 +1,0 @@
-app/
-    admin/
-        admin-books/
-        admin-genres/
-    app.component
