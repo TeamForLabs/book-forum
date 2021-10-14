@@ -1,23 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~normalize.css';
-@import '../node_modules/modern-css-reset/dist/reset.min.css';
+// @import '~normalize.css';
+// @import '../node_modules/modern-css-reset/dist/reset.min.css';
 
 :root {
-    --clr-dark: rgb(13, 17, 19);
-    --clr-light: #fff;
-    --clr-accent: rgb(222, 52, 0);
-    --clr-accent-dark: rgb(163, 38, 0);
-    --clr-secondary: rgb(0, 76, 199);
+    --color-dark: rgb(13, 17, 19);
+    --color-light: #fff;
+    --color-accent: rgb(222, 52, 0);
+    --color-accent-dark: rgb(163, 38, 0);
+    --color-secondary: rgb(0, 76, 199);
 
     --br: 0.5em;
     --transition: transform 200ms ease-out;
 }
 
+@font-face {
+    font-family: Roboto-Condensed-Regular;
+    src: url('assets/fonts/Roboto_Condensed/RobotoCondensed-Regular.ttf');
+}
+
+@font-face {
+    font-family: Roboto-Condensed-Bold;
+    src: url('assets/fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf');
+}
+
+@font-face {
+    font-family: Merriweather-Regular;
+    src: url('./assets/fonts/Merriweather/Merriweather-Regular.ttf');
+}
+
+@font-face {
+    font-family: Merriweather-Bold;
+    src: url('./assets/fonts/Merriweather/Merriweather-Bold.ttf');
+}
+@font-face {
+    font-family: Georama-Regular;
+    font-weight: 400;
+    src: url('./assets/fonts/Georama/Georama-VariableFont_wdth\,wght.ttf');
+}
+@font-face {
+    font-family: Georama-Bold;
+    font-weight: 800;
+    src: url('./assets/fonts/Georama/Georama-VariableFont_wdth\,wght.ttf');
+}
+p {
+    font-family: Roboto-Condensed-Regular;
+    // font-family: Merriweather-Regular;
+    // font-family: Georama-Regular;
+
+}
 .btn {
-    border: 0;
-    background-color: var(--clr-secondary);
+    font-family: Roboto-Condensed-Bold;
+    // font-family: Merriweather-Bold;
+    // font-family: Georama-Bold;
     border-radius: 100vw;
-    color: var(--clr-light);
-    font-weight: bold;
-    padding: 0.5em 1em;
 }
