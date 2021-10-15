@@ -1,21 +1,63 @@
 .books {
-    font-family: Roboto-Condensed-Regular;
-    // background-color: var(--color-dark);
-    // border: 2px dashed red;
+  font-family: Roboto-Condensed-Regular;
+  position: relative;
+    padding: 2rem 1.2rem 5rem;
 }
 
-img {
-    max-width: 100%;
-}
 
 .book {
-    position: relative;
-    width: 12.5em;
-    z-index: 1;
-    cursor: pointer;
-}
+  position: relative;
+  width: 12.5em;
+  cursor: pointer;
 
-.bookmark {
+  .front {
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform-origin: center bottom;
+    color: white;
+
+    .thumbnail {
+      width: 170px;
+      height: 266px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      background-image: url('../../../assets/book_muscle.jpg');
+      background-color: var(--color-lighter);
+      border-radius: var(--br);
+    }
+
+    .book-about {
+      width: 100%;
+
+      .book-title {
+        width: 100%;
+        margin: .75em 0;
+        font-size: small;
+        font-weight: bold;
+        color: var(--clr-light);
+        white-space: nowrap;
+      }
+
+      .book-info {
+        text-align: right;
+        font-size: 0.72rem;
+        line-height: 0.77rem;
+        columns: 2;
+        column-rule: thin solid rgba(white, 0.25);
+
+        .author {
+          text-align: left;
+        }
+      }
+    }
+
+  }
+
+  .bookmark {
     position: absolute;
     top: -1px;
     right: 1em;
@@ -25,132 +67,109 @@ img {
     transition: var(--transition);
     z-index: 1;
     padding: 1.5rem 0;
+
     .genre {
-        display: block;
-        transform: rotate(90deg);
+      display: block;
+      transform: rotate(90deg);
     }
+  }
 }
-
-.book-info {
-    text-align: center;
-    font-size: 0.72rem;
-    line-height: 0.77rem;
-    columns: 2;
-    column-rule: thin solid rgba(white, 0.25);
-}
-
-.front {
-    transition: var(--transition);
-
-    .thumbnail {
-        border-radius: var(--br);
-    }
-
-    .book-title {
-        margin: .75em 0;
-        font-weight: bold;
-        color: var(--clr-light)
-    }
-
-
-}
-
 
 .background {
-    inset: 0;
-    position: absolute;
-    background-color: hsl(203, 32%, 29%);
-    z-index: -1;
-    transform: scale(.2, .9);
-    border-radius: var(--br);
-    opacity: 0;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  //   background-color: hsl(203, 32%, 29%);
+  background-color: rgba(var(--color-dark-plain), var(--alpha));
+  border-radius: var(--br);
+  transform-origin: center 0;
+  transform: scale(.2, .9);
+  opacity: 0;
+  z-index: -1;
 
-    .book-details {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+  .book-details {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-        .book-description {
-            height: 70px;
-            overflow: hidden;
-            text-align: center;
-            font-size: 0.55rem;
-            line-height: 0.9rem;
-            margin-bottom: 1em;
-            color: #aaa;
-        }
-
-        .btn {
-            margin: 0;
-            font-size: 0.75em;
-            font-weight: bold;
-        }
+    .book-description {
+      height: 70px;
+      overflow: hidden;
+      text-align: center;
+      font-size: 0.55rem;
+      line-height: 0.9rem;
+      margin-bottom: 1em;
+      //   color: #fff;
+      color: var(--color-light);
     }
+
+    .btn {
+      margin: 0;
+      font-size: 0.75em;
+      font-weight: bold;
+    }
+  }
 }
+
+
 
 .book:hover {
-    color: var(--color-light);
-    z-index: 10;
-    .bookmark {
-        transform: translate(150%, -41%);
-    }
-    .front {
-        transform: translateY(-30%) scale(0.8);
-        .book-about {
-            animation: bookName 200ms linear forwards;
-            .book-title {
-                margin: .75em 0;
-            }
-        }
+  color: var(--color-dark);
+  z-index: 1;
 
+  .front {
+    transform: translateY(-27%) scale(0.8);
+
+    .book-about {
+      animation: bookName 200ms linear forwards;
+
+      .book-title {
+        font-size: 16px;
+      }
     }
 
-    .back {
-        opacity: 1;
-        transform: translateY(0%);
-    }
+  }
 
-    .background {
-        display: flex;
-        padding: 1.5em;
-        align-items: flex-end;
-        justify-content: center;
-        transition: var(--transition),
-            opacity 100ms linear;
-        transform: scale(1.6, 1.2);
-        opacity: 1;
-        height: 350px;
-    }
-}
-
-@keyframes bookName {
-    0% {
-        text-align: left;
-        opacity: 1;
-    }
-
-    20% {
-        text-align-last: left;
-        opacity: 0;
-    }
-
-    50% {
-        text-align: center;
-        opacity: 0;
-    }
-
-    100% {
-        text-align: center;
-        transform: scale(1.2);
-        opacity: 1;
-    }
-
+  .background {
+    padding: 1.5em;
+    transition: var(--transition),
+      opacity 100ms linear;
+    transform: scale(1.6, 1.24);
+    opacity: 1;
+    height: 350px;
+  }
 }
 
 .clr-col {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+@keyframes bookName {
+  0% {
+    text-align: left;
+    opacity: 1;
+  }
+
+  20% {
+    text-align-last: left;
+    opacity: 0;
+  }
+
+  50% {
+    text-align: center;
+    opacity: 0;
+  }
+
+  100% {
+    text-align: center;
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
 }

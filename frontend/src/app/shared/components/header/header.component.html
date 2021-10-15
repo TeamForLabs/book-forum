@@ -1,24 +1,27 @@
-<clr-header class="header-6">
-        <div class="branding">
-            <a [routerLink]="['']" routerLinkActive="router-link-active" class="nav-link">
-                <clr-icon shape="book"></clr-icon>
-                <span class="title">BookForum</span>
-            </a>
-        </div>
-        <form class="search header-nav">
-            <label for="search_input">
-                <input id="search_input" type="text" placeholder="Search for keywords..." />
-            </label>
-        </form>
-        <div class="header-nav" [clr-nav-level]="1">
-            <a class="nav-link nav-text" [routerLink]="['/books']" routerLinkActive="router-link-active">Books</a>
-        </div>
-        <div class="header-nav" >
-            <a class="nav-link nav-text" [routerLink]="['/books']" routerLinkActive="router-link-active">Books</a>
-        </div>
-        <div class="header-actions">
-            <a href="javascript://" class="nav-link nav-icon" aria-label="settings">
-                <clr-icon shape="cog"></clr-icon>
-            </a>
-        </div>
+<clr-header class="header" style="z-index: -1;">
+    <div class="branding">
+        <a [routerLink]="['']" routerLinkActive="router-link-active" class="nav-link">
+            <clr-icon shape="book" style="color: white"></clr-icon>
+            <span class="title">BookForum</span>
+        </a>
+    </div>
+    <form class="search header-nav">
+        <label for="search_input">
+            <input id="search_input" type="text" placeholder="Search for keywords..." />
+        </label>
+    </form>
+    <div class="header-nav" [clr-nav-level]="1">
+        <a class="nav-link nav-text" [routerLink]="['/books']" routerLinkActive="router-link-active">Books</a>
+    </div>
+    <div class="header-nav">
+        <a class="nav-link nav-text" [routerLink]="['/contact']" routerLinkActive="router-link-active">Contact</a>
+    </div>
+    <div class="header-actions">
+        <a class="nav-link nav-text" [routerLink]="['/books']" routerLinkActive="router-link-active">
+            <clr-icon shape="home"></clr-icon>
+        </a>
+        <a href="javascript://" class="nav-link nav-icon" aria-label="settings">
+            <clr-icon shape="cog"></clr-icon>
+        </a>
+    </div>
 </clr-header>

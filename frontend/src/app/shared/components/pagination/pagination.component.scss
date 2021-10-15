@@ -1,0 +1,36 @@
+.pagination {
+  display: flex;
+
+  .page-cell {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-dark);
+    color: white;
+    transition: all 200ms;
+
+    &.active {
+      background-color: var(--color-light);
+    }
+
+    &:first-child {
+      border-radius: var(--br) 0 0 var(--br);
+    }
+
+    &:last-child {
+      border-radius: 0 var(--br) var(--br) 0;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-light);
+    }
+    &:disabled {
+      transition: unset;
+      color: var(--color-disabled);
+    }
+  }
+}
