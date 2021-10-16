@@ -2,9 +2,9 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import mixins, generics
 from rest_framework import permissions
 
-from books.models import Book
+from books.models import Book, Comment
 from books.permissions import IsCreatorOrReadOnly
-from books.serializers import BookSerializer
+from books.serializers import BookSerializer, CommentSerializer, BookDetailsSerializer
 
 
 class BookList(mixins.ListModelMixin,
@@ -31,7 +31,7 @@ class BookDetails(mixins.RetrieveModelMixin,
                   mixins.DestroyModelMixin,
                   generics.GenericAPIView):
     queryset = Book.objects.all()
-    serializer_class = BookSerializer
+    serializer_class = BookDetailsSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsCreatorOrReadOnly]
 
     def get(self, request, *args, **kwargs):
@@ -42,3 +42,16 @@ class BookDetails(mixins.RetrieveModelMixin,
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+
+
+class CommentCreate(mixins.CreateModelMixin,
+                    generics.GenericAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+    def perform_create(self, serializer):
+        book = Book.objects.get(pk=self.kwargs.get('pk'))
+        serializer.save(user=self.request.user, book=book)

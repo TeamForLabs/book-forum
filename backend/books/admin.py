@@ -1,13 +1,13 @@
 from django.contrib import admin
 
-from books.models import Book, Author, Genre
-from django.db import models
+from books.models import Book, Author, Genre, Comment
 
 
 class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'published_year')
     search_fields = ['title', 'author__full_name', 'published_year']
     filter_horizontal = ('genres',)
+    readonly_fields = ('created_at',)
     list_filter = [
         'author__full_name',
         'published_year',
@@ -42,3 +42,4 @@ class GenreAdmin(admin.ModelAdmin):
 admin.site.register(Book, BookAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Genre, GenreAdmin)
+admin.site.register(Comment)

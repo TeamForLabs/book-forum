@@ -56,7 +56,7 @@ def create_author():
 def create_book(author, creator):
     title = fake.bs()
     description = fake.paragraph(nb_sentences=10)
-    thumbnail = fake.image_url()
+    thumbnail = fake.image_url(width=400, height=500)
     published_year = fake.pyint(min_value=1800, max_value=2021)
     created_at = fake.date_time()
     b = Book.objects.create(

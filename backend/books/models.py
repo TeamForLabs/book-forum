@@ -8,6 +8,7 @@ class Book(models.Model):
     thumbnail = models.URLField(max_length=500)
     published_year = models.PositiveSmallIntegerField(default=1984)
     genres = models.ManyToManyField('Genre', related_name='books')
+    bookmarked = models.ManyToManyField(User, related_name='bookmarks', blank=True)
     author = models.ForeignKey('Author',
                                on_delete=models.CASCADE,
                                related_name='books')
@@ -32,3 +33,15 @@ class Genre(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    book = models.ForeignKey('Book', related_name='comments',
+                             on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='comments',
+                             on_delete=models.CASCADE)
+    text = models.TextField(max_length=1024)
+    created_at = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.text[:50]}'
