@@ -1,15 +1,26 @@
-.content-container {
-
+body {
   background-image: url('../assets/book_bg_2.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-//   background-blend-mode: color-dodge;
+}
+
+.content-container {
+  background-image: url('../assets/book_bg_2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 
   .content-area {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(10px);
-    background-color: rgba(0, 0, 0, 0.15);
+    background-color: rgba(0, 0, 0, 0.25);
   }
 
+}
+
+.sidenav {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.25);
 }

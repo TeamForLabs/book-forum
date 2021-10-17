@@ -3,6 +3,7 @@
         <div class="book">
             <div class="front">
                 <div class="thumbnail" [style.backgroundImage]="'url('+book.thumbnail+')'"></div>
+                <!-- <div class="thumbnail" [style.backgroundImage]="'url(../../../assets/book_muscle.jpg)'"></div> -->
                 <div class="book-about">
                     <h3 class="book-title">{{ book.title | slice:0:20 | titlecase }}..</h3>
                     <div class="book-info">
@@ -14,12 +15,15 @@
             <div class="background">
                 <div class="book-details">
                     <p class="book-description">{{book.description}}</p>
-                    <button type="button" class="btn btn-light-color-outline">See details</button>
+                    <button type="button" class="btn btn-light-color-outline"
+                        [routerLink]="['/books-details',  book.id]">See details</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <div class="clr-col clr-col-12">
-    <app-pagination (clicked)="getBooksData($event); " [paginateTotal]="booksTotal" [currPage]="booksCurrBatch" [paginateBatch]="booksBatchSize" *ngIf="books" [scrollElem]="'.content-area'"></app-pagination>
+    <app-pagination [baseUrl]="'/books'" [paginateTotal]="booksTotal" [currPage]="booksCurrBatch"
+        [paginateBatch]="booksBatchSize" *ngIf="books" [scrollElem]="'.content-area'">
+    </app-pagination>
 </div>

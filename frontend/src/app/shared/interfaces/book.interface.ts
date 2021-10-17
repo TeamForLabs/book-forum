@@ -6,7 +6,7 @@ export interface IBookResponse {
     published_year: number;
     author_name: string;
     created_at: string;
-    book_genres: string[]
+    book_genres: Array<string>
 }
 
 export interface IBookRequest {
@@ -16,5 +16,5 @@ export interface IBookRequest {
     published_year?: number;
     author_name: string;
     created_at: string;
-    book_genres: string[]
+    book_genres: Array<string>;
 }

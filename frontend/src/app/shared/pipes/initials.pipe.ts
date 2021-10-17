@@ -10,11 +10,9 @@ export class InitialsPipe implements PipeTransform {
 
     if (words.length === 1) {
       return value;
-    } else if (words.length === 2) {
+    } else if (words.length >= 2) {
       let out: string = '';
-      for (let i = 0; i < words.length - 1; i++) {
-        out += words[0][0].toUpperCase() + '.';
-      }
+      out += words[0][0].toUpperCase() + '.';
       return out + words[words.length - 1];
     } else {
       return value;

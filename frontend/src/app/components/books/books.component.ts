@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IBookResponse } from 'src/app/shared/interfaces/book.interface';
-import { environment } from 'src/environments/environment';
 import { BooksService } from 'src/app/shared/services/books/books.service';
-import { ThrowStmt } from '@angular/compiler';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-books',
@@ -17,15 +17,23 @@ export class BooksComponent implements OnInit {
   public booksNextBatch: string | null = null
   public booksPrevBatch: string | null = null;
   public booksCurrBatch!: number;
-  private url = environment.BACKEND_URL;
-  private api = { books: `${this.url}/books/` }
+
+  public routerEventSub!: Subscription;
 
   constructor(
     private booksService: BooksService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.getBooksData(19);
+    this.getBooksData(1);
+    this.routerEventSub = this.router.events.subscribe(event => {
+      if(event instanceof NavigationEnd) {
+        const page = Number(this.activatedRoute.snapshot.paramMap.get('page'));
+        this.getBooksData(page);
+      }
+    })
   }
 
   getBooksData(page?: number): void {

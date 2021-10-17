@@ -1,0 +1,22 @@
+<div class="login-wrapper">
+    <form class="login" [formGroup]="loginForm" (ngSubmit)="login()">
+        <section class="title">
+            <h3 class="welcome">Welcome to</h3>
+            BookForum
+        </section>
+        <div class="login-group">
+            <clr-input-container>
+                <label class="clr-sr-only">Username</label>
+                <input type="text" formControlName="username" clrInput placeholder="Username" />
+            </clr-input-container>
+            <clr-password-container>
+                <label class="clr-sr-only">Password</label>
+                <input type="password" formControlName="password" clrPassword placeholder="Password" />
+            </clr-password-container>
+            <div class="error" #wrongPassword>
+                Invalid user name or password
+            </div>
+            <button type="submit" class="btn btn-primary" type="submit" [disabled]="loginForm.invalid">Sign In</button>
+        </div>
+    </form>
+</div>

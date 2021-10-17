@@ -9,7 +9,7 @@ import { IBookResponse, IBookRequest } from '../../interfaces/book.interface';
 })
 export class BooksService {
 
-  private url = environment.BACKEND_URL;
+  private url = environment.BACKEND_API_URL;
   private api = { books: `${this.url}/books` }
 
   constructor(

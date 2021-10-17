@@ -1,1 +1,26 @@
-<p>books-details works!</p>
+<ng-container *ngIf="book">
+    <div class="block book">
+        <div class="thumbnail" [style.backgroundImage]="'url(' + book?.thumbnail + ')'"></div>
+        <h2 class="book-title">{{ book?.title | titlecase }}</h2>
+        <div class="book-details">
+            <div class="book-author">{{book.author_name}}</div>
+            <div class="book-genres">{{book.book_genres.join(', ')}}</div>
+        </div>
+        <div class="book-description">{{ book?.description }}</div>
+    </div>
+    <div class="block comments">
+        <form class="form" clrForm [formGroup]="commentForm">
+            <div class="input-wrapper">
+                <clr-input-container>
+                    <label>Your name: </label>
+                    <input clrInput placeholder="Enter your name.." formControlName="commenter" style="color: white;"/>
+                </clr-input-container>
+                <clr-textarea-container style="margin-bottom: var(--main-gutter);">
+                    <label>Comment: </label>
+                    <textarea clrTextarea formControlName="comment" cols="400" rows="7"></textarea>
+                </clr-textarea-container>
+                <button id="comment-btn" type="button" class="btn btn-block btn-light-color-outline" name="description">Comment</button>
+            </div>
+        </form>
+    </div>
+</ng-container>

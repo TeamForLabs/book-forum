@@ -2,89 +2,108 @@
 @import "https://pro.fontawesome.com/releases/v5.10.0/css/all.css";
 
 :root {
-    --color-dark-plain: 134, 67, 35;
-    --color-dark: rgb(var(--color-dark-plain));
+   --color-dark-plain: 134, 67, 35;
+  --color-dark: rgb(var(--color-dark-plain));
 
-    --color-light-plain: 244,169,128;
-    --color-light: rgb(var(--color-light-plain));
+  --color-light-plain: 244, 169, 128;
+  --color-light: rgb(var(--color-light-plain));
 
-    // --color-lighter-plain: 244,169,128;
-    --color-lighter-plain: 226, 182, 182;
-    --color-lighter: rgb(var(--color-light-plain));
+  // --color-lighter-plain: 244,169,128;
+  --color-lighter-plain: 226, 182, 182;
+  --color-lighter: rgb(var(--color-light-plain));
 
-    --color-disabled: grey;
+  --color-disabled: grey;
 
-    --color-secondary-plain: 179, 179, 179;
-    --color-secondary: rgb(var(--color-secondary-plain));
-    --color-secondary-a: rbga(var(--color-secondary-plain), var(--alpha));
+  --color-secondary-plain: 179, 179, 179;
+  --color-secondary: rgb(var(--color-secondary-plain));
+  --color-secondary-a: rbga(var(--color-secondary-plain), var(--alpha));
 
-    --alpha: 0.8;
-    --br: 0.5em;
-    --transition: transform 200ms ease-out;
+  --alpha: 0.6;
+  --br: 0.5em;
+  --main-gutter: 2em;
+  --text-gutter: 1em;
+  --transition: transform 200ms ease-out;
 }
 
 @font-face {
-    font-family: Roboto-Condensed-Regular;
-    src: url('assets/fonts/Roboto_Condensed/RobotoCondensed-Regular.ttf');
+  font-family: Roboto-Condensed-Regular;
+  src: url('assets/fonts/Roboto_Condensed/RobotoCondensed-Regular.ttf');
 }
 
 @font-face {
-    font-family: Roboto-Condensed-Bold;
-    src: url('assets/fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf');
+  font-family: Roboto-Condensed-Bold;
+  src: url('assets/fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf');
 }
 
 p {
-    font-family: Roboto-Condensed-Regular;
+  font-family: Roboto-Condensed-Regular;
 
 }
+
 .btn {
-    font-family: Roboto-Condensed-Bold;
-    border-radius: 100vw;
+  font-family: Roboto-Condensed-Bold;
+  border-radius: 100vw;
 }
 
 .btn-dark-color-outline {
-    color: var(--color-dark);
-    background-color: transparent;
-    border-color: var(--color-dark);
-    &:hover {
-        color: white;
-        // background-color: var(--color-light);
-        background-color: var(--color-dark);
-        border-color: var(--color-light);
-    }
+  color: var(--color-dark);
+  background-color: transparent;
+  border-color: var(--color-dark);
+
+  &:hover {
+    color: white;
+    // background-color: var(--color-light);
+    background-color: var(--color-dark);
+    border-color: var(--color-light);
+  }
 }
 
 .btn-light-color-outline {
-    color: var(--color-light);
-    background-color: transparent;
-    border-color: var(--color-light);
-    &:hover {
-        color: white;
-        // background-color: var(--color-light);
-        background-color: var(--color-light);
-        border-color: var(--color-dark);
-    }
+  color: var(--color-light);
+  background-color: transparent;
+  border-color: var(--color-light);
+
+  &:hover {
+    color: white;
+    // background-color: var(--color-light);
+    background-color: var(--color-light);
+    border-color: var(--color-dark);
+  }
 }
 
-::-webkit-scrollbar{
-    width: 0.6rem;
-    height: 0.6rem;
+::-webkit-scrollbar {
+  width: 0.6rem;
+  height: 0.6rem;
 }
-::-webkit-scrollbar-track{
-    // background-color: var(--color-secondary);
-    border-radius: 100vw;
-    margin-block: 0.3rem;
+
+::-webkit-scrollbar-track {
+  // background-color: var(--color-secondary);
+  border-radius: 100vw;
+  margin-block: 0.3rem;
 }
-::-webkit-scrollbar-thumb{
-    background-color: var(--color-dark);
-    border-radius: 100vw;
-    border: 1px solid hsl(208, 16%, 84%);
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-dark);
+  border-radius: 100vw;
+  border: 1px solid hsl(208, 16%, 84%);
 }
 
 img {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 .router-link-active {
-    color: white;
+  color: white;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+.vertical-bar {
+  min-height: 1em;
+  border-right: 2px solid darkgrey;
 }

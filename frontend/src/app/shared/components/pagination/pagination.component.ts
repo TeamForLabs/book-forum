@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pagination',
@@ -7,23 +8,25 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class PaginationComponent implements OnInit {
 
-  @Input('paginatePrev') paginatePrev!: string;
-  @Input('paginateNext') paginateNext!: string;
   @Input('paginateTotal') paginateTotal!: number;
   @Input('paginateBatch') paginateBatch!: number;
   @Input('currPage') currPage!: number;
   @Input('scrollElem') scrollElem!: string;
+  @Input('baseUrl') baseUrl!: string;
 
   @Output('clicked') clicked = new EventEmitter<number>();
 
-  pageNums: Array<number> = [];
+  public pageNums: Array<number> = [];
   private reach = 2;
 
-  constructor() { }
+  constructor(
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     this.generatePages();
     this.filterPages();
+    this.currPage = Number(this.activatedRoute.snapshot.paramMap.get('page'));
   }
 
   onClick(event: MouseEvent): void {
@@ -75,39 +78,6 @@ export class PaginationComponent implements OnInit {
       })
     }
   }
-
-  fastForward(): void {
-    this.currPage = this.getMaxPages();
-    this.clicked.emit(this.getMaxPages());
-    this.scolllToTop();
-    this.generatePages();
-    this.filterPages();
-  }
-
-  fastBackward(): void {
-    this.currPage = 1;
-    this.clicked.emit(1);
-    this.scolllToTop();
-    this.generatePages();
-    this.filterPages();
-  }
-
-  forward(): void {
-    this.currPage = this.currPage + 1;
-    this.clicked.emit(this.currPage);
-    this.scolllToTop();
-    this.generatePages();
-    this.filterPages();
-  }
-
-  backward(): void {
-    this.currPage = this.currPage - 1;
-    this.clicked.emit(this.currPage);
-    this.scolllToTop();
-    this.generatePages();
-    this.filterPages();
-  }
-
 
   getMaxPages(): number {
     return Math.ceil(this.paginateTotal / this.paginateBatch);

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClient, HttpClientModule } from "@angular/common/http";
+import {  HttpClientModule } from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +13,9 @@ import { BooksComponent } from './components/books/books.component';
 import { BooksDetailsComponent } from './components/books-details/books-details.component';
 import { InitialsPipe } from './shared/pipes/initials.pipe';
 import { PaginationComponent } from './shared/components/pagination/pagination.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { BookmarksComponent } from './components/bookmarks/bookmarks.component';
 
 @NgModule({
   declarations: [
@@ -21,14 +25,19 @@ import { PaginationComponent } from './shared/components/pagination/pagination.c
     BooksComponent,
     BooksDetailsComponent,
     InitialsPipe,
-    PaginationComponent
+    PaginationComponent,
+    HomeComponent,
+    LoginComponent,
+    BookmarksComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ClarityModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

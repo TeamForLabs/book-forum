@@ -25,10 +25,12 @@
       border-radius: 0 var(--br) var(--br) 0;
     }
 
-    &:hover:not(:disabled) {
+    &:hover:not(:disabled), &:focus:not(:disabled) {
       background-color: var(--color-light);
+      z-index: 1;
     }
     &:disabled {
+      cursor: unset;
       transition: unset;
       color: var(--color-disabled);
     }
