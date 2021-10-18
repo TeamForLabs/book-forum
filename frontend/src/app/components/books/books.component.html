@@ -23,7 +23,6 @@
     </div>
 </div>
 <div class="clr-col clr-col-12">
-    <app-pagination [baseUrl]="'/books'" [paginateTotal]="booksTotal" [currPage]="booksCurrBatch"
-        [paginateBatch]="booksBatchSize" *ngIf="books" [scrollElem]="'.content-area'">
+    <app-pagination [baseUrl]="'/books'" [paginateTotal]="booksTotal" [currPage]="booksCurrBatch" *ngIf="books" [scrollElem]="'.content-area'">
     </app-pagination>
 </div>

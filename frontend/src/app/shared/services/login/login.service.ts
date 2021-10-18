@@ -11,7 +11,7 @@ export class LoginService {
   
   private url = environment.BACKEND_AUTH_URL;
   private api = { auth: `${this.url}/` };
-  public authAction = new Subject();
+  public authAction = new Subject<boolean>();
 
   constructor(
     private http: HttpClient

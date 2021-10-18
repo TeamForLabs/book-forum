@@ -33,8 +33,12 @@ export class LoginComponent implements OnInit {
   login() {
     console.log('Sent request =>', this.loginForm.value);
     this.loginService.login(this.loginForm.value).subscribe(data => {
-      localStorage.setItem('bookForumToken', data.token);
-      this.router.navigate(['home']);
+      const userData = {
+        username: this.loginForm.value.username,
+        token: data.token,
+      }
+      localStorage.setItem('bookForumToken', JSON.stringify(userData));
+      this.router.navigate(['..'])
       this.loginService.authAction.next(true);
     }, err => {
       console.dir(err);
