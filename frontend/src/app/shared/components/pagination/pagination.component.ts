@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 export class PaginationComponent implements OnInit {
 
   @Input('paginateTotal') paginateTotal!: number;
-  @Input('paginateBatch') paginateBatch!: number;
+  @Input('paginateBatch') paginateBatch: number = 12;
   @Input('currPage') currPage!: number;
   @Input('scrollElem') scrollElem!: string;
   @Input('baseUrl') baseUrl!: string;

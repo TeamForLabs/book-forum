@@ -1,7 +1,7 @@
 <ng-container *ngIf="book">
     <div class="block book">
         <div class="thumbnail" [style.backgroundImage]="'url(' + book?.thumbnail + ')'"></div>
-        <h2 class="book-title">{{ book?.title | titlecase }}</h2>
+        <h2 class="book-title">{{ book?.title | titlecase }} ({{book.published_year}})</h2>
         <div class="book-details">
             <div class="book-author">{{book.author_name}}</div>
             <div class="book-genres">{{book.book_genres.join(', ')}}</div>
@@ -9,18 +9,30 @@
         <div class="book-description">{{ book?.description }}</div>
     </div>
     <div class="block comments">
-        <form class="form" clrForm [formGroup]="commentForm">
-            <div class="input-wrapper">
-                <clr-input-container>
-                    <label>Your name: </label>
-                    <input clrInput placeholder="Enter your name.." formControlName="commenter" style="color: white;"/>
-                </clr-input-container>
-                <clr-textarea-container style="margin-bottom: var(--main-gutter);">
-                    <label>Comment: </label>
-                    <textarea clrTextarea formControlName="comment" cols="400" rows="7"></textarea>
-                </clr-textarea-container>
-                <button id="comment-btn" type="button" class="btn btn-block btn-light-color-outline" name="description">Comment</button>
+
+        <button class="btn btn-light-color-outline" (click)="readyToComment = true;" *ngIf="!readyToComment">Add
+            Comment</button>
+        <ng-container *ngIf="readyToComment">
+            <form class="form" clrForm [formGroup]="commentForm" *ngIf="isLoggedIn else loginToComment">
+                <div class="input-wrapper">
+                    <clr-textarea-container style="margin-bottom: var(--main-gutter);">
+                        <label>Comment: </label>
+                        <textarea clrTextarea formControlName="comment" cols="400" rows="7"></textarea>
+                    </clr-textarea-container>
+                    <button id="comment-btn" type="button" class="btn btn-block btn-light-color-outline"
+                        (click)="postComment()">Comment here: </button>
+                </div>
+            </form>
+        </ng-container>
+        <ng-template #loginToComment>
+            <div style="color: white; text-align: center;">
+                <div>Sign In to leave Comments</div>
+                <button class="btn btn-primary" [routerLink]="['/login']">Sign In</button>
             </div>
-        </form>
+        </ng-template>
+
+        <ul class="comment-list">
+            <li *ngFor="let comment of book.comments.reverse()">{{ comment.text }}</li>
+        </ul>
     </div>
 </ng-container>
