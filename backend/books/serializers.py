@@ -24,9 +24,10 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ('text', 'username')
+        fields = ('text', 'username', 'created_at')
         extra_kwargs = {
             'username': {'read_only': True},
+            'created_at': {'read_only': True},
         }
 
 
@@ -37,7 +38,7 @@ class BookDetailsSerializer(BookSerializer):
         model = Book
         fields = (
             'id', 'title', 'thumbnail', 'published_year', 'author_name', 'author', 'description', 'genres',
-            'book_genres', 'comments')
+            'book_genres', 'page_amount', 'comments')
 
 
 class UserSerializer(serializers.ModelSerializer):

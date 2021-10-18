@@ -9,6 +9,7 @@ class Book(models.Model):
     published_year = models.PositiveSmallIntegerField(default=1984)
     genres = models.ManyToManyField('Genre', related_name='books')
     bookmarked = models.ManyToManyField(User, related_name='bookmarks', blank=True)
+    page_amount = models.IntegerField(blank=False)
     author = models.ForeignKey('Author',
                                on_delete=models.CASCADE,
                                related_name='books')
@@ -41,7 +42,7 @@ class Comment(models.Model):
     user = models.ForeignKey(User, related_name='comments',
                              on_delete=models.CASCADE)
     text = models.TextField(max_length=1024)
-    created_at = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.text[:50]}'

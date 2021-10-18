@@ -59,6 +59,7 @@ def create_book(author, creator):
     thumbnail = fake.image_url(width=400, height=500)
     published_year = fake.pyint(min_value=1800, max_value=2021)
     created_at = fake.date_time()
+    page_amount = random.randint(100, 999)
     b = Book.objects.create(
         title=title,
         description=description,
@@ -66,6 +67,7 @@ def create_book(author, creator):
         published_year=published_year,
         author=author,
         creator=creator,
+        page_amount=page_amount,
         created_at=created_at
     )
     genres_objects = []
