@@ -57,10 +57,33 @@
     padding: var(--main-gutter);
     border-radius: var(--br);
     background-color: rgba(var(--color-dark-plain), var(--alpha));
+    margin-bottom: var(--main-gutter);
     color: white;
 
     label {
       color: white;
+    }
+  }
+
+  &-list {
+    list-style: none; 
+    min-height: 60px;
+    & > li {
+      display: block;
+      background-color: rgba(var(--color-dark-plain), var(--alpha));
+      border-radius: var(--br);
+      margin-bottom: var(--text-gutter);
+      padding: var(--text-gutter);
+      h6 {
+        margin-block: var(--text-gutter);
+        color: rgba(255,255,255,0.5);
+      }
+      p {
+        color: white;
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 }

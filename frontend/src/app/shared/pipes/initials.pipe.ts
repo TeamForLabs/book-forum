@@ -12,7 +12,7 @@ export class InitialsPipe implements PipeTransform {
       return value;
     } else if (words.length >= 2) {
       let out: string = '';
-      out += words[0][0].toUpperCase() + '.';
+      out += words[0][0].toUpperCase() + '. ';
       return out + words[words.length - 1];
     } else {
       return value;

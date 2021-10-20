@@ -10,7 +10,7 @@
     </div>
     <div class="block comments">
 
-        <button class="btn btn-light-color-outline" (click)="readyToComment = true;" *ngIf="!readyToComment">Add
+        <button class="btn btn-light-color-outline" (click)="readyToComment = true;" *ngIf="!readyToComment" style="margin-bottom: var(--main-gutter);">Add
             Comment</button>
         <ng-container *ngIf="readyToComment">
             <form class="form" clrForm [formGroup]="commentForm" *ngIf="isLoggedIn else loginToComment">
@@ -20,7 +20,7 @@
                         <textarea clrTextarea formControlName="comment" cols="400" rows="7"></textarea>
                     </clr-textarea-container>
                     <button id="comment-btn" type="button" class="btn btn-block btn-light-color-outline"
-                        (click)="postComment()">Comment here: </button>
+                        (click)="postComment()">Comment</button>
                 </div>
             </form>
         </ng-container>
@@ -31,8 +31,11 @@
             </div>
         </ng-template>
 
-        <ul class="comment-list">
-            <li *ngFor="let comment of book.comments.reverse()">{{ comment.text }}</li>
+        <ul class="comments-list">
+            <li *ngFor="let comment of book.comments.reverse()">
+                <h6>Автор: {{comment.username}}</h6>
+                <p>{{comment.text}}</p>
+            </li>
         </ul>
     </div>
 </ng-container>

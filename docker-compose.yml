@@ -32,7 +32,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./frontend
-    command: node_modules/.bin/ng serve --host 0.0.0.0 --disableHostCheck --poll 1000
+    command: node_modules/.bin/ng serve --host 0.0.0.0 --disableHostCheck --poll 1000 -o
     volumes:
       - ./frontend:/usr/bookForum/
       - '/usr/bookForum/node_modules'
