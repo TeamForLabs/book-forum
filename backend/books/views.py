@@ -90,3 +90,12 @@ class BookmarkList(APIView):
         user = request.user
         serializer = UserSerializer(user)
         return Response(serializer.data)
+
+
+class BooksFlush(APIView):
+    permission_classes = [permissions.IsAdminUser]
+
+    @staticmethod
+    def get(request):
+        Book.objects.all().delete()
+        return Response({"status": "books flushed"})
