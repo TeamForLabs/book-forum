@@ -2,25 +2,12 @@ import scrapy
 from scrapy_djangoitem import DjangoItem
 
 from books.models import Book
+from helpers.enums import SELECTORS
 
 
 class BooksCrawlerItem(DjangoItem):
     django_model = Book
     genre = scrapy.Field()
-
-
-selectors = {
-    'title': '//*[@id="tab-content-description"]/div/div[1]/div[1]/div[1]/h2/span/text()',
-    'page_amount': '//tr[./td/div/div[contains(text(), \'Кількість сторінок\')]]/td/text()',
-    'author': 'body > div.wrapper > div.main-container.case > div > div.main.row > div > article > '
-              'div.product-view.type-simple > section.product-view-box-top.clearfix > div.product-shop.f-left > '
-              'div.product-attributes.product-attributes_short > table > tbody > tr:nth-child(1) > td:nth-child(2) > '
-              'a::text',
-    'published_year': '//tr[./td/div/div[contains(text(), \'Рік видання\')]]/td/text()',
-    'thumbnail': '#image::attr(src)',
-    'description': '//*[@id="tab-content-description"]/div/div[1]/div[1]/div[2]//text()',
-    'genre': 'body > div.wrapper > div.main-container.case > div > ul > li:last-child > a > span::text'
-}
 
 
 class YakabooSpider(scrapy.Spider):
@@ -36,12 +23,12 @@ class YakabooSpider(scrapy.Spider):
     @staticmethod
     def parse_single(response):
         book = BooksCrawlerItem()
-        book['title'] = response.xpath(selectors['title']).get()
-        book['page_amount'] = int(response.xpath(selectors['page_amount'])[1].get().strip().split(' ')[0])
-        book['thumbnail'] = response.css(selectors['thumbnail']).get()
-        book['author'] = response.css(selectors['author']).get()
-        book['published_year'] = int(response.xpath(selectors['published_year']).get().strip())
-        book['description'] = ' '.join(response.xpath(selectors['description']).extract()).strip()
-        book['genre'] = response.css(selectors['genre']).get()
+        book['title'] = response.xpath(SELECTORS['title']).get()
+        book['page_amount'] = int(response.xpath(SELECTORS['page_amount'])[1].get().strip().split(' ')[0])
+        book['thumbnail'] = response.css(SELECTORS['thumbnail']).get()
+        book['author'] = response.css(SELECTORS['author']).get()
+        book['published_year'] = int(response.xpath(SELECTORS['published_year']).get().strip())
+        book['description'] = ' '.join(response.xpath(SELECTORS['description']).extract()).strip()
+        book['genre'] = response.css(SELECTORS['genre']).get()
 
         return book
