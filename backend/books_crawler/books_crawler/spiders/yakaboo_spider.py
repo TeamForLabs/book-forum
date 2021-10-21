@@ -6,15 +6,20 @@ from books.models import Book
 
 class BooksCrawlerItem(DjangoItem):
     django_model = Book
+    genre = scrapy.Field()
 
 
 selectors = {
     'title': '//*[@id="tab-content-description"]/div/div[1]/div[1]/div[1]/h2/span/text()',
     'page_amount': '//tr[./td/div/div[contains(text(), \'Кількість сторінок\')]]/td/text()',
-    'author': 'body > div.wrapper > div.main-container.case > div > div.main.row > div > article > div.product-view.type-simple > section.product-view-box-top.clearfix > div.product-shop.f-left > div.product-attributes.product-attributes_short > table > tbody > tr:nth-child(1) > td:nth-child(2) > a::text',
+    'author': 'body > div.wrapper > div.main-container.case > div > div.main.row > div > article > '
+              'div.product-view.type-simple > section.product-view-box-top.clearfix > div.product-shop.f-left > '
+              'div.product-attributes.product-attributes_short > table > tbody > tr:nth-child(1) > td:nth-child(2) > '
+              'a::text',
     'published_year': '//tr[./td/div/div[contains(text(), \'Рік видання\')]]/td/text()',
     'thumbnail': '#image::attr(src)',
     'description': '//*[@id="tab-content-description"]/div/div[1]/div[1]/div[2]//text()',
+    'genre': 'body > div.wrapper > div.main-container.case > div > ul > li:last-child > a > span::text'
 }
 
 
@@ -28,7 +33,8 @@ class YakabooSpider(scrapy.Spider):
             book_url = item.css('a::attr(href)')[0].get()
             yield scrapy.Request(book_url, self.parse_single)
 
-    def parse_single(self, response):
+    @staticmethod
+    def parse_single(response):
         book = BooksCrawlerItem()
         book['title'] = response.xpath(selectors['title']).get()
         book['page_amount'] = int(response.xpath(selectors['page_amount'])[1].get().strip().split(' ')[0])
@@ -36,4 +42,6 @@ class YakabooSpider(scrapy.Spider):
         book['author'] = response.css(selectors['author']).get()
         book['published_year'] = int(response.xpath(selectors['published_year']).get().strip())
         book['description'] = ' '.join(response.xpath(selectors['description']).extract()).strip()
+        book['genre'] = response.css(selectors['genre']).get()
+
         return book

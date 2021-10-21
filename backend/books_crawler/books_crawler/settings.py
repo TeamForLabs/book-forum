@@ -66,6 +66,8 @@ ITEM_PIPELINES = {
    'books_crawler.books_crawler.pipelines.BooksCrawlerPipeline': 500,
 }
 
+LOG_LEVEL = 'INFO'
+
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True
