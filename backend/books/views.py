@@ -80,3 +80,13 @@ class BookmarkCreate(APIView):
         serializer = UserSerializer(user)
         response['user'] = serializer.data
         return Response(response)
+
+
+class BookmarkList(APIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    @staticmethod
+    def get(request):
+        user = request.user
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
