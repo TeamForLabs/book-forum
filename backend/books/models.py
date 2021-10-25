@@ -25,6 +25,9 @@ class Book(models.Model):
 class Author(models.Model):
     full_name = models.CharField(max_length=300)
 
+    class Meta:
+        ordering = ('full_name',)
+
     def __str__(self):
         return self.full_name
 

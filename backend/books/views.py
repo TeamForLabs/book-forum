@@ -1,13 +1,14 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import mixins, generics, filters
 from rest_framework import permissions
-from rest_framework.generics import get_object_or_404
+from rest_framework.generics import get_object_or_404, ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from books.models import Book, Comment
+from books.models import Book, Comment, Genre, Author
 from books.permissions import IsCreatorOrReadOnly
-from books.serializers import BookSerializer, CommentSerializer, BookDetailsSerializer, UserSerializer
+from books.serializers import BookSerializer, CommentSerializer, BookDetailsSerializer, UserSerializer, GenreSerializer, \
+    AuthorSerializer
 
 
 class BookList(mixins.ListModelMixin,
@@ -101,3 +102,21 @@ class BooksFlush(APIView):
     def get(request):
         Book.objects.all().delete()
         return Response({"status": "books flushed"})
+
+
+class GenresList(ListAPIView):
+    queryset = Genre.objects.all()
+    pagination_class = None
+    serializer_class = GenreSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+
+class AuthorsList(ListAPIView):
+    queryset = Author.objects.all()
+    pagination_class = None
+    serializer_class = AuthorSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
