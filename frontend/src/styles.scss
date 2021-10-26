@@ -1,12 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "https://pro.fontawesome.com/releases/v5.10.0/css/all.css";
+@import '~ngx-toastr/toastr';
 
 :root {
    --color-dark-plain: 134, 67, 35;
   --color-dark: rgb(var(--color-dark-plain));
+  --color-dark-a: rgba(var(--color-dark-plain), var(--alpha));
 
   --color-light-plain: 244, 169, 128;
   --color-light: rgb(var(--color-light-plain));
+  --color-light-a: rgba(var(--color-light-plain), var(--alpha));
 
   // --color-lighter-plain: 244,169,128;
   --color-lighter-plain: 226, 182, 182;
@@ -16,9 +19,9 @@
 
   --color-secondary-plain: 179, 179, 179;
   --color-secondary: rgb(var(--color-secondary-plain));
-  --color-secondary-a: rbga(var(--color-secondary-plain), var(--alpha));
+  --color-secondary-a: rgba(var(--color-secondary-plain), var(--alpha));
 
-  --alpha: 0.6;
+  --alpha: 0.8;
   --br: 0.5em;
   --main-gutter: 2em;
   --text-gutter: 1em;
@@ -48,6 +51,11 @@ h1,h2,h3,h4,h5,h6 {
 .btn {
   font-family: Roboto-Condensed-Bold;
   border-radius: 100vw;
+  // padding-inline: var(--text-gutter);
+  // padding-block: calc(var(--text-gutter) / 4);
+  // width: fit-content;
+  // height: fit-content;
+  // font-size: 20px;
 }
 
 .btn-dark-color-outline {
@@ -111,4 +119,26 @@ img {
 .vertical-bar {
   min-height: 1em;
   border-right: 2px solid darkgrey;
+}
+
+hr {
+  border: none;
+  border-top: 2px solid rgba(255,255,255,0.6);
+}
+
+.block {
+  width: 100%;
+  padding: var(--main-gutter);
+  margin-bottom: var(--main-gutter);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+  @media screen and (max-width: 560px) {
+    padding: 0.5em;
+  }
+}
+
+.text-disabled {
+  color: rgba(255,255,255,0.4) !important;
 }

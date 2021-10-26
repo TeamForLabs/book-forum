@@ -9,7 +9,7 @@ import { ICommentRequest } from '../../interfaces/comment.interface';
 })
 export class CommentsService {
 
-  private url = environment.BACKEND_API_URL;
+  private url = environment.BACKEND_URL;
   private api = { comment: '' }
   private httpHeaders!: HttpHeaders;
 
@@ -28,7 +28,7 @@ export class CommentsService {
 
   private updateAPIWithID(id: number) {
     if (id) {
-      this.api.comment = `${this.url}/books/${id}/comment`;
+      this.api.comment = `${this.url}/api/books/${id}/comment`;
     } else {
       this.api.comment = '';
     }

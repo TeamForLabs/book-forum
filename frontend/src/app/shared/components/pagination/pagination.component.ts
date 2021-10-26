@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss']
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnInit, OnChanges {
 
   @Input('paginateTotal') paginateTotal!: number;
   @Input('paginateBatch') paginateBatch: number = 12;
@@ -14,40 +14,60 @@ export class PaginationComponent implements OnInit {
   @Input('scrollElem') scrollElem!: string;
   @Input('baseUrl') baseUrl!: string;
 
-  @Output('clicked') clicked = new EventEmitter<number>();
+  @Output('page-change') clicked = new EventEmitter<number>();
 
   public pageNums: Array<number> = [];
-  private reach = 2;
+  public reach = 2;
 
-  constructor(
-    private activatedRoute: ActivatedRoute
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.generatePages();
     this.filterPages();
-    this.currPage = Number(this.activatedRoute.snapshot.paramMap.get('page'));
+  }
+
+  ngOnChanges(): void {
+    this.generatePages();
+    this.filterPages();
   }
 
   onClick(event: MouseEvent): void {
-    let trg: HTMLDivElement = event.target as HTMLDivElement;
-    let page = Number(trg.dataset.page);
-    this.clicked.emit(page);
-    this.currPage = page;
+    let trg: any = event.target as any;
+    trg = trg.closest('button') as HTMLButtonElement;
+    if(trg.id === 'step-forward') {
+      this.currPage++;
+    } else if(trg.id === 'step-backward') {
+      this.currPage--;
+    } else if(trg.id === 'fast-forward') {
+      this.currPage = this.getMaxPages();
+    } else if(trg.id === 'fast-backward') {
+      this.currPage = 1;
+    } else  {
+      this.currPage = Number(trg.dataset.page);
+    }
+    this.clicked.emit(this.currPage);
     this.scolllToTop();
     this.generatePages();
     this.filterPages();
+    
   }
 
   filterPages(): void {
     let nPages = this.getMaxPages();
     let around = 2 * this.reach + 1;
+    // console.log("pagination.filterPages currPage =>", this.currPage);
+    // console.log("pagination.filterPages reach =>", around);
+    
     if (nPages >= 5) {
       if (nPages - this.currPage <= this.reach) {
         this.pageNums = this.pageNums.slice(-around);
         return;
       }
       if (this.currPage > this.reach && this.currPage <= nPages) {
+        console.log('------------');
+        console.log("pagination.filterPages currPage =>", this.currPage);
+        console.log("pagination.filterPages reach =>", this.reach);
+        console.log(`${this.currPage - this.reach} <= page <= ${this.currPage + this.reach}`);
         this.pageNums = this.pageNums.filter(p => p >= this.currPage - this.reach && p <= this.currPage + this.reach);
         return;
       } else {
@@ -59,6 +79,7 @@ export class PaginationComponent implements OnInit {
 
   generatePages(): void {
     let nPages = this.getMaxPages();
+    // console.log('nPages =>', nPages);
     this.pageNums = [];
     for (let page = 1; page <= nPages; page++) {
       this.pageNums.push(page);

@@ -1,0 +1,22 @@
+#footer {
+  background-color: var(--color-dark);
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 30px;
+    text-decoration: none;
+    color: white;
+
+    .fab {
+      line-height: 25px;
+      font-size: 25px;
+      margin-right: 10px;
+    }
+  }
+}

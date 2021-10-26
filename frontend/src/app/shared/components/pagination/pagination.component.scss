@@ -16,15 +16,15 @@
     &.active {
       background-color: var(--color-light);
     }
-
     &:first-child {
       border-radius: var(--br) 0 0 var(--br);
     }
-
     &:last-child {
       border-radius: 0 var(--br) var(--br) 0;
     }
-
+    &:only-child {
+      border-radius: var(--br);
+    }
     &:hover:not(:disabled), &:focus:not(:disabled) {
       background-color: var(--color-light);
       z-index: 1;

@@ -11,13 +11,13 @@
         </label>
     </form>
     <div class="header-nav" [clr-nav-level]="2">
-        <a class="nav-link nav-text" [routerLink]="['/books/1']" routerLinkActive="router-link-active">Books</a>
+        <a class="nav-link nav-text" [routerLink]="['/books']" [queryParams]="{page: 1}" routerLinkActive="router-link-active">Books</a>
     </div>
     <div class="header-nav" [clr-nav-level]="1">
         <a class="nav-link nav-text" [routerLink]="['/contact']" routerLinkActive="router-link-active">Contact</a>
     </div>
     <div class="header-actions">
-        <a class="nav-link nav-icon" [routerLink]="['/bookmarks']" *ngIf="isLoggedIn">
+        <a class="nav-link nav-icon" *ngIf="isLoggedIn" (click)="onOpenBookmarks()">
             <clr-icon shape="bookmark"></clr-icon>
         </a>
         <a class="nav-link nav-icon" *ngIf="isLoggedIn" (click)="logout()">

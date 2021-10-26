@@ -1,16 +1,11 @@
-.block {
-  width: 100%;
-  padding: var(--main-gutter);
-  margin-bottom: var(--main-gutter);
 
-  &:last-child {
-    margin-bottom: 0;
-  }
+h2, h4 {
+  color: white
 }
 
 .book {
-  min-height: 100%;
-  border: 2px dashed red;
+  height: max-content;
+  // border: 2px dashed red;
   color: white;
   font-family: Roboto-Condensed-Regular;
 
@@ -50,9 +45,8 @@
 }
 
 .comments {
-  border: 2px dashed gold;
+  // border: 2px dashed gold;
   color: white;
-
   .form {
     padding: var(--main-gutter);
     border-radius: var(--br);
@@ -83,6 +77,14 @@
       }
       &:last-child {
         margin-bottom: 0;
+        display: static;
+        background-color: transparent;
+        border-radius: none;
+        padding: 0;
+        text-align: center;
+        & .btn {
+          font-size: 20px;
+        }
       }
     }
   }

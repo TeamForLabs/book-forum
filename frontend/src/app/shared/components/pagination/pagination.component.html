@@ -1,25 +1,26 @@
 <div class="pagination">
 
-    <button class="page-cell" (click)="onClick($event)" [disabled]="currPage === 1" [routerLink]="[ baseUrl, 1]"
-        data-page=1>
+    <button id="fast-backward" class="page-cell" (click)="onClick($event)" [disabled]="currPage === 1"
+        *ngIf="getMaxPages() > reach * 2 + 1">
         <i class="fal fa-fast-backward"></i>
     </button>
 
-    <button class="page-cell" (click)="onClick($event)" style="margin-right: 10px;" [disabled]="currPage === 1"
-        [attr.data-page]="currPage - 1" [routerLink]="[baseUrl, currPage - 1]">
+    <button id="step-backward" class="page-cell" (click)="onClick($event)" [disabled]="currPage === 1"
+        style="margin-right: 10px;" *ngIf="getMaxPages() > reach + 1">
         <i class="fal fa-step-backward"></i>
     </button>
 
-    <button class="page-cell" *ngFor="let page of pageNums" (click)="onClick($event)" [attr.data-page]="page"
-        [routerLink]="[baseUrl, page]" routerLinkActive="active">{{ page }}</button>
+    <button class="page-cell" [class.active]="page === currPage" *ngFor="let page of pageNums" (click)="onClick($event)"
+        [attr.data-page]="page">{{
+        page }}</button>
 
-    <button class="page-cell" (click)="onClick($event)" [routerLink]="[baseUrl, currPage + 1]"
-        [disabled]="currPage === getMaxPages()" [attr.data-page]="currPage - 1" style="margin-left: 10px;">
+    <button id="step-forward" class="page-cell" (click)="onClick($event)" [disabled]="currPage === getMaxPages()"
+        style="margin-left: 10px;" *ngIf="getMaxPages() > reach + 1">
         <i class="fal fa-step-forward"></i>
     </button>
 
-    <button class="page-cell" (click)="onClick($event)" [attr.data-page]="getMaxPages()"
-        [routerLink]="[baseUrl, getMaxPages()]" [disabled]="currPage === getMaxPages()">
+    <button id="fast-forward" class="page-cell" (click)="onClick($event)" [disabled]="currPage === getMaxPages()"
+        *ngIf="getMaxPages() > reach * 2 + 1">
         <i class="fal fa-fast-forward"></i>
     </button>
 

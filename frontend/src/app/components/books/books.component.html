@@ -1,6 +1,57 @@
+<form class="search block" [formGroup]="searchForm">
+    <div class="search-field clr-row clr-align-items-center">
+        <div class="clr-col clr-col-sm-9 clr-col-7">
+            <clr-icon shape="search" size="28"></clr-icon>
+            <input type="search" formControlName="searchString" placeholder="Шукай тут..">
+        </div>
+        <div class="clr-col clr-col-sm-3 clr-col-5">
+            <input type="button" class="btn btn-light-color-outline" value="Шукати" (click)="startSearch()">
+        </div>
+    </div>
+    <br>
+    <!-- <div class="search-options clr-row">
+        <div class="clr-col-12 search-options-type">
+            <clr-radio-wrapper (click)="onSearchOptionChange(both)">
+                <input type="radio" clrRadio value="both" formContolName="searchOptions" name="searchOptions" #both/>
+                <label>За назвою та описом</label>
+            </clr-radio-wrapper>
+            <clr-radio-wrapper (click)="onSearchOptionChange(byTitle)">
+                <input type="radio" clrRadio value="title" formContolName="searchOptions" name="searchOptions" #byTitle />
+                <label>Тільки за назвою</label>
+            </clr-radio-wrapper>
+            <clr-radio-wrapper (click)="onSearchOptionChange(byAuthor)">
+                <input type="radio" clrRadio value="author" formContolName="searchOptions" name="searchOptions" #byAuthor />
+                <label>За автором</label>
+            </clr-radio-wrapper>
+
+        </div>
+        <div class="clr-col-12">
+            <clr-input-container>
+                <label for="">Рік:</label>
+                <input clrInput placeholder="Рік.." type="number" maxlength="4" max="2021"
+                    formControlName="published_year" style="color: white" />
+            </clr-input-container>
+            <clr-select-container>
+                <label>Жанр: </label>
+                <select clrSelect name="options" formControlName="genre" style="color: white;">
+                    <option [value]="null">Select</option>
+                    <option *ngFor="let genre of genres" [ngValue]="genre.id">{{genre.title}}</option>
+                </select>
+            </clr-select-container>
+            <clr-select-container>
+                <label>Автор: </label>
+                <select clrSelect name="options" formControlName="author" style="color: white;">
+                    <option *ngFor="let author of authors" [ngValue]="author.id" [attr.selected]="author.id==='' ? true : null">{{author.full_name}}</option>
+                </select>
+            </clr-select-container>
+        </div>
+    </div> -->
+</form>
 <div class="clr-row books">
-    <div class="clr-col clr-col-12 clr-col-xl-3 clr-col-lg-3 clr-col-md-4 clr-col-sm-6" *ngFor="let book of books">
+    <div class="clr-col clr-col-12 clr-col-xl-3 clr-col-lg-3 clr-col-md-4 clr-col-sm-6" *ngFor="let book of books"
+        style="margin-bottom: 1.7em;">
         <div class="book">
+            <button class="bookmark" (click)="createBookmark($event)" [attr.data-book-id]="book.id"></button>
             <div class="front">
                 <div class="thumbnail" [style.backgroundImage]="'url('+book.thumbnail+')'"></div>
                 <!-- <div class="thumbnail" [style.backgroundImage]="'url(../../../assets/book_muscle.jpg)'"></div> -->
@@ -23,6 +74,7 @@
     </div>
 </div>
 <div class="clr-col clr-col-12">
-    <app-pagination [baseUrl]="'/books'" [paginateTotal]="booksTotal" [currPage]="booksCurrBatch" *ngIf="books" [scrollElem]="'.content-area'">
+    <app-pagination [baseUrl]="'/books'" [paginateTotal]="booksTotal" *ngIf="books" [currPage]="currPage" (page-change)="onChangePage($event)"
+        [scrollElem]="'.content-area'">
     </app-pagination>
 </div>

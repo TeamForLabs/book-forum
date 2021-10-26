@@ -1,17 +1,20 @@
 <ng-container *ngIf="book">
-    <div class="block book">
+    <div class="block book clearfix">
         <div class="thumbnail" [style.backgroundImage]="'url(' + book?.thumbnail + ')'"></div>
         <h2 class="book-title">{{ book?.title | titlecase }} ({{book.published_year}})</h2>
         <div class="book-details">
             <div class="book-author">{{book.author_name}}</div>
-            <div class="book-genres">{{book.book_genres.join(', ')}}</div>
+            <div class="book-genres">{{book.book_genres ? book.book_genres.join(', ') : 'Невідомо'}}</div>
         </div>
         <div class="book-description">{{ book?.description }}</div>
     </div>
-    <div class="block comments">
+    <hr>
+    <h2 style="text-indent: 28px">Коментарі <span style="font-size: 0.7em;">({{commentCount}} із
+            {{book.comments.length}})</span></h2>
+    <div class="block comments" #commentsStart>
 
-        <button class="btn btn-light-color-outline" (click)="readyToComment = true;" *ngIf="!readyToComment" style="margin-bottom: var(--main-gutter);">Add
-            Comment</button>
+        <button class="btn btn-light-color-outline" (click)="openCommentForm()" *ngIf="!readyToComment"
+            style="margin-bottom: var(--main-gutter);">Add Comment</button>
         <ng-container *ngIf="readyToComment">
             <form class="form" clrForm [formGroup]="commentForm" *ngIf="isLoggedIn else loginToComment">
                 <div class="input-wrapper">
@@ -20,7 +23,7 @@
                         <textarea clrTextarea formControlName="comment" cols="400" rows="7"></textarea>
                     </clr-textarea-container>
                     <button id="comment-btn" type="button" class="btn btn-block btn-light-color-outline"
-                        (click)="postComment()">Comment</button>
+                        (click)="postComment()">Відправити</button>
                 </div>
             </form>
         </ng-container>
@@ -31,11 +34,17 @@
             </div>
         </ng-template>
 
-        <ul class="comments-list">
-            <li *ngFor="let comment of book.comments.reverse()">
-                <h6>Автор: {{comment.username}}</h6>
+        <ul class="comments-list" *ngIf="book.comments.length else noComments">
+            <li *ngFor="let comment of book.comments.reverse().slice(0,commentCount)">
+                <h6>Автор: {{comment.username}} <br> Створено: [{{comment.created_at | date:'short'}}]</h6>
                 <p>{{comment.text}}</p>
             </li>
+            <li><button class="btn btn-light-color-outline" (click)="moreComments()"
+                    *ngIf="book.comments.length > commentCount">Більше</button></li>
         </ul>
+        <ng-template #noComments>
+            <h4>Наразі відгуків немає. Будь першим!</h4>
+        </ng-template>
+
     </div>
 </ng-container>

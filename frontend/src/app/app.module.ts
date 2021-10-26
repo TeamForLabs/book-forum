@@ -16,6 +16,7 @@ import { PaginationComponent } from './shared/components/pagination/pagination.c
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { BookmarksComponent } from './components/bookmarks/bookmarks.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { BookmarksComponent } from './components/bookmarks/bookmarks.component';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

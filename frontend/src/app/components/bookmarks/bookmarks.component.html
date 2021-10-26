@@ -1,1 +1,27 @@
-<p>bookmarks works!</p>
+<clr-modal [(clrModalOpen)]="opened" [clrModalClosable]="false" clrModalSize="lg">
+        <h3 class="modal-title"><clr-icon shape="star" size="24"></clr-icon> Збережені</h3>
+        <div class="modal-body">
+            <clr-datagrid>
+                <clr-dg-column>Ідентифікатор</clr-dg-column>
+                <clr-dg-column>Назва</clr-dg-column>
+                <clr-dg-column>Опубліковано</clr-dg-column>
+                <clr-dg-column>Жанр</clr-dg-column>
+                <clr-dg-column>Деталі</clr-dg-column>
+
+                <clr-dg-row *ngFor="let bookmark of bookmarks">
+                    <clr-dg-cell>{{bookmark.id}}</clr-dg-cell>
+                    <clr-dg-cell>{{bookmark.title}}</clr-dg-cell>
+                    <clr-dg-cell>{{bookmark.published_year}}</clr-dg-cell>
+                    <clr-dg-cell>{{bookmark.book_genres.join(', ')}}</clr-dg-cell>
+                    <clr-dg-cell style="text-align: center;"><button class="btn btn-link"
+                            [routerLink]="['/books-details', bookmark.id]" (click)="onClose()">Деталі</button>
+                    </clr-dg-cell>
+                </clr-dg-row>
+
+                <clr-dg-footer>{{bookmarks.length}} bookmarks</clr-dg-footer>
+            </clr-datagrid>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light-color-outline" (click)="onClose()">Закрити</button>
+        </div>
+</clr-modal>

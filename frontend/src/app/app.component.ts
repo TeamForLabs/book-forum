@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontend';
+  
+  isOpened = false;
+
+  switchModalTo(opened: boolean) {
+    this.isOpened = opened;
+  }
 }

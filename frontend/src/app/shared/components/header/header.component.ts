@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '../../services/login/login.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -10,9 +10,10 @@ import { LoginService } from '../../services/login/login.service';
 export class HeaderComponent implements OnInit {
 
   public isLoggedIn = false;
+  @Output('openBookmarks') openBookmarks = new EventEmitter<boolean>();
 
   constructor(
-    private loginService: LoginService,
+    private loginService: AuthService,
     private router: Router
   ) { }
 
@@ -34,5 +35,8 @@ export class HeaderComponent implements OnInit {
     })
   }
 
+  onOpenBookmarks(): void {
+    this.openBookmarks.emit(false);
+  }
 
 }
