@@ -35,7 +35,7 @@ export class BooksService {
 
   getCustom(params: any): Observable<any> {
     let q = this.query(params);
-    // console.log('query', q);
+    console.log('query', q);
     return this.http.get<any>(`${this.api.books}/${q}`);
   }
 

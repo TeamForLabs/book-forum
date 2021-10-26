@@ -55,19 +55,12 @@ export class PaginationComponent implements OnInit, OnChanges {
   filterPages(): void {
     let nPages = this.getMaxPages();
     let around = 2 * this.reach + 1;
-    // console.log("pagination.filterPages currPage =>", this.currPage);
-    // console.log("pagination.filterPages reach =>", around);
-    
     if (nPages >= 5) {
       if (nPages - this.currPage <= this.reach) {
         this.pageNums = this.pageNums.slice(-around);
         return;
       }
       if (this.currPage > this.reach && this.currPage <= nPages) {
-        console.log('------------');
-        console.log("pagination.filterPages currPage =>", this.currPage);
-        console.log("pagination.filterPages reach =>", this.reach);
-        console.log(`${this.currPage - this.reach} <= page <= ${this.currPage + this.reach}`);
         this.pageNums = this.pageNums.filter(p => p >= this.currPage - this.reach && p <= this.currPage + this.reach);
         return;
       } else {
@@ -79,7 +72,6 @@ export class PaginationComponent implements OnInit, OnChanges {
 
   generatePages(): void {
     let nPages = this.getMaxPages();
-    // console.log('nPages =>', nPages);
     this.pageNums = [];
     for (let page = 1; page <= nPages; page++) {
       this.pageNums.push(page);

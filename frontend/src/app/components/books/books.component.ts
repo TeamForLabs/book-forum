@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { IBookResponse } from 'src/app/shared/interfaces/book.interface';
 import { BooksService } from 'src/app/shared/services/books/books.service';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BookmarksService } from 'src/app/shared/services/bookmarks/bookmarks.service';
 import { ToastrService } from 'ngx-toastr';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ThrowStmt } from '@angular/compiler';
+import { FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-books',
@@ -27,12 +26,9 @@ export class BooksComponent implements OnInit {
   public routerEventSub!: Subscription;
 
   public searchForm!: FormGroup;
-  public searchParams = {
-    search: "",
-    page: 1,
-  }
   public isDisabled = false;
   public currPage!: number;
+  public detailedSearch = false;
 
   constructor(
     private booksService: BooksService,
@@ -56,29 +52,34 @@ export class BooksComponent implements OnInit {
     this.initSearchForm();
   }
 
+  clearRouter(): void {
+    this.router.navigate(['/books']);
+    this.initSearchForm();
+  }
+
   initSearchForm() {
     this.searchForm = this.fb.group({
-      searchString: ["смерть"],
-      searchOptions: [Validators.required],
+      search: [""],
       published_year: [null],
-      genre: ['Не вибрано'],
-      author: ['Не вибрано']
+      genres: [''],
+      author: [''],
     });
   }
 
   onChangePage(page: number) {
-    this.router.navigate(['/books'], {queryParams: {page: page}, queryParamsHandling: "merge"});
+    this.router.navigate(['/books'],
+      { queryParams: { page: page },
+        queryParamsHandling: "merge" 
+      });
   }
 
   startSearch(): void {
-    this.searchParams.search = this.searchForm.value.searchString;
-    this.searchParams.page = 1;
-    const p = this.booksService.cleanParams(this.searchParams);
+    const p = this.booksService.cleanParams(this.searchForm.value);
+    p.page = 1;
     this.router.navigate(['/books'], {
       queryParams: p
     });
   }
-
 
   getBooksData(params: any): void {
     this.booksService.getCustom(params).subscribe(data => {
@@ -90,7 +91,7 @@ export class BooksComponent implements OnInit {
     this.booksService.getGenres().subscribe(genres => {
       this.genres = [
         // { id: "", title: "Вибери жанр" },
-        ... genres
+        ...genres
       ]
     })
   }
@@ -99,7 +100,7 @@ export class BooksComponent implements OnInit {
     this.booksService.getAuthors().subscribe(authors => {
       this.authors = [
         // { id: "", full_name: "Вибери автора"},
-        ... authors
+        ...authors
       ]
     })
   }
@@ -135,8 +136,4 @@ export class BooksComponent implements OnInit {
     this.books = data.results;
   }
 
-  composeQuery() {
-    let p = this.searchParams;
-    return ``
-  }
 }

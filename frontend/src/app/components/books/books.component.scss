@@ -1,6 +1,20 @@
+#router-cleaner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 0 0 0 50%;
+  display: flex;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+}
+
 .search {
   background-color: var(--color-dark-a);
   border-radius: var(--br);
+  position: relative;
 }
 
 .search clr-icon {
@@ -41,6 +55,10 @@
     justify-content: flex-start;
     align-items: center;
     gap: var(--text-gutter);
+    @media screen and (max-width: 560px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
   & input[type="checkbox"] {
     &:disabled + label {

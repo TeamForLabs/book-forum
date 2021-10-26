@@ -21,7 +21,7 @@
   --color-secondary: rgb(var(--color-secondary-plain));
   --color-secondary-a: rgba(var(--color-secondary-plain), var(--alpha));
 
-  --alpha: 0.8;
+  --alpha: 0.6;
   --br: 0.5em;
   --main-gutter: 2em;
   --text-gutter: 1em;
@@ -135,10 +135,27 @@ hr {
     margin-bottom: 0;
   }
   @media screen and (max-width: 560px) {
-    padding: 0.5em;
+    padding-inline: 0.5em;
   }
 }
 
 .text-disabled {
   color: rgba(255,255,255,0.4) !important;
+}
+
+
+.input-container {
+  margin-bottom: var(--text-gutter);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  .clr-form-control {
+    margin: 0 !important;
+  }
+}
+
+option {
+  text-transform: capitalize;
 }
