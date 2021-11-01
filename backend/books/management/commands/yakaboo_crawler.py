@@ -4,7 +4,6 @@ from scrapy.settings import Settings
 
 from books_crawler.books_crawler import settings
 from books_crawler.books_crawler.spiders.yakaboo_spider import YakabooSpider
-from helpers.enums import GENRES
 
 
 class Command(BaseCommand):
@@ -20,10 +19,13 @@ class Command(BaseCommand):
         crawler_settings = Settings()
         crawler_settings.setmodule(settings)
         process = CrawlerProcess(settings=crawler_settings)
-        start_urls = [
-            f"https://www.yakaboo.ua/ua/knigi{GENRES[options['genre']] if options['genre'] else '.html'}?book_lang=Ukrainskij&p={page}"
-            for page in
-            range(1, options['pages'] + 1)]
+
+        start_urls = []
+        slug = "https://www.yakaboo.ua/ua/knigi{}?book_lang=Ukrainskij&p={}"
+        for page in range(1, options['pages'] + 1):
+            genre = options['genre'] if options['genre'] else '.html'
+            url = slug.format(genre, page)
+            start_urls.append(url)
 
         print('Initializing the Yakaboo crawler...')
         process.crawl(YakabooSpider, start_urls=start_urls)
